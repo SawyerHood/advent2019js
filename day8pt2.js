@@ -16,7 +16,6 @@ function run(file) {
     res.push(row);
     console.log(row.join(""));
   }
-  // console.log(res);
 }
 
 function getFreqTable(layer) {
