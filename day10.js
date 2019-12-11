@@ -18,16 +18,14 @@ function run(file) {
 
 function countRoids(input, x, y) {
   const slopes = new Set();
-  let state = "before";
   for (let i = 0; i < input.length; i++) {
     for (let j = 0; j < input[i].length; j++) {
       if (x === i && y === j) {
-        state = "after";
         continue;
       }
       if (input[i][j] === "#") {
-        const slope = (i - x) / (j - y);
-        slopes.add(slope + state);
+        const slope = Math.atan2(i - x, j - y);
+        slopes.add(slope);
       }
     }
   }

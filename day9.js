@@ -70,8 +70,7 @@ function* runMachine(state) {
       case OUT: {
         i += 2;
         const val = fetchVal(state, firstVal, m1);
-        // yield val;
-        console.log(val);
+        yield val;
         break;
       }
       case IF_TRUE: {
