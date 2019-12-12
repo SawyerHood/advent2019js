@@ -8,5 +8,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "mathjs": "^6.2.5"
   }
 }

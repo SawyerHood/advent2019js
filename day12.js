@@ -1,13 +1,33 @@
 const fs = require("fs");
+const { lcm } = require("mathjs");
 
 function main() {
   const planets = readInput("day12.txt");
-  for (let i = 0; i < 1000; i++) {
-    step(planets);
-  }
+  let i = 0;
+  const seen = [new Set(), new Set(), new Set()];
+  const cycle = [null, null, null];
 
-  const energy = sum(planets.map(p => sum(p.pos) * sum(p.vel)));
-  console.log(energy);
+  do {
+    for (let j = 0; j < 3; j++) {
+      let key = [];
+      for (planet of planets) {
+        key.push(planet.vel[j], planet.pos[j]);
+      }
+      key = key.join(",");
+      if (seen[j].has(key) && !cycle[j]) {
+        cycle[j] = i;
+      }
+      seen[j].add(key);
+    }
+    step(planets);
+    i++;
+  } while (cycle.some(v => v === null));
+
+  console.log(lcm(...cycle));
+}
+
+function getEnergy(planets) {
+  return sum(planets.map(p => sum(p.pos) * sum(p.vel)));
 }
 
 function sum(arr) {
